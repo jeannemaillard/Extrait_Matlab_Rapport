@@ -39,7 +39,7 @@ end
 
 
 
-
+%Fonction d'application de la rotation aux trajectoires
 function [x_rot, y_rot, z_rot] = apply_rotation_3d(x, y, z, theta_y, theta_z, theta_x)
     % Matrice de rotation autour de l'axe y
     R_y = [cos(theta_y)  0 sin(theta_y);
@@ -59,7 +59,7 @@ function [x_rot, y_rot, z_rot] = apply_rotation_3d(x, y, z, theta_y, theta_z, th
     y_rot = coords_rot(2, :)';
     z_rot = coords_rot(3, :)';
 end
-
+%Verification si les points de la trajectoire sont dans l'espace de travail
 function points_inside = compute_points_inside(x_traj, y_traj, z_traj, rayon_sphere6, rayon_sphere4)
     % Vérifier si chaque point de la trajectoire est à la fois à l'intérieur de l'espace de travail et à l'extérieur de l'enveloppe convexe
     points_inside = false(1, numel(x_traj));
@@ -86,6 +86,7 @@ function points_inside2 = compute_points_inside2(x_traj2, y_traj2, z_traj2,rayon
     end
 end
 
+%Fonctions coûts d et d2
 function error_traj = calculate_error_traj(center, trajectory_data, rayon_sphere, rayon_sphere4)
     x_center = center(1);
     y_center = center(2);
@@ -128,7 +129,7 @@ function error_traj2 = calculate_error_traj2(center, trajectory2_data, rayon_sph
 end
 
 
-% Fonction pour vérifier si les trajectoires sont à l'intérieur des sphères avec un rayon donné
+% Fonction contrainte pour vérifier si les trajectoires sont dans leur espace de travail
 function [c, ceq] = check_trajectories(center, trajectory_data, trajectory2_data, rayon_sphere, rayon_sphere4, rayon_sphere6)
     x_center = center(1);
     y_center = center(2);
