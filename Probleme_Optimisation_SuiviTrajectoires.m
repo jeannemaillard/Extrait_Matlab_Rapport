@@ -435,7 +435,7 @@ function [c, ceq] = contraintes(angles_opt, robot, result_angles, env, env2, x_d
     collision_detected = collisions(angles_opt, robot, env);
     reconfiguration_detected = verifier_reconfig(result_angles);
   
-    if ~singularite && cyclicite && ~collision_detected &&~reconfiguration_detected
+    if ~singularite && cyclicite && ~collision_detected && ~reconfiguration_detected
         c = 0; % Contrainte respectée
     else
         c = 1; % Contrainte violée
